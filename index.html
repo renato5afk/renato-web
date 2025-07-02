@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portafolio de desarrollador web – proyectos, habilidades y contacto.">
+    <title>Renato | Desarrollador Web</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">RNT<span>.</span></a>
+        <nav id="nav-menu">
+            <a href="about.html">Sobre mí</a>
+            <a href="projects.html">Proyectos</a>
+            <a href="blog.html">Blog</a>
+            <a href="#contacto">Contacto</a>
+           
+        </nav>
+        <button id="hamburger" aria-label="Menú móvil">☰</button>
+    </header>
+
+    <section class="hero">
+        <img src="assets/img/icono.jpg" alt="Imagen destacada de código">
+        <div class="hero-text">
+            <h1> <span>Renato Pasten</span></h1>
+            <p>Ingeniero en Computación especializado en JavaScript.</p>
+            <a href="assets/img/Renato pasten barraza 2025.pdf" target="_blank">
+                <button class="btn-curriculum">Abrir Currículum</button>
+            </a>
+           
+        </div>
+    </section>
+
+    <section class="skills">
+        <h2>Habilidades</h2>
+        <ul class="skill-grid">
+            <li><img src="assets/img/html5CSS3.jpg" alt="">HTML5</li>
+            <li><img src="assets/img/CSS3.png" alt="">CSS3</li>
+            <li><img src="assets/img/jvscript.png" alt="">JavaScript</li>
+            <li><img src="assets/img/nodejs.png" alt="">Node.js</li>
+            <li><img src="assets/img/jsReact.png" alt="">React</li>
+            <li><img src="assets/img/SQLite.png" alt="">SQLite</li>
+        </ul>
+    </section>
+
+    <section class="cta">
+        <h2>¿Quieres ver mi trabajo?</h2>
+        <a href="projects.html" class="btn-secondary">Ver proyectos</a>
+    </section>
+
+    <section id="contacto" class="contact section-padded">
+        <div class="container">
+            <h2>Ponte en Contacto</h2>
+            <p class="section-description">¿Tienes una idea, un proyecto o simplemente quieres saludar? ¡No dudes en enviarme un mensaje!</p>
+            <form id="contact-form" action="https://formspree.io/f/xldnzqvd" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                    <span class="error" id="errorNombre"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" required placeholder="tu.email@ejemplo.com">
+                    <span class="error" id="errorCorreo"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="6" required placeholder="Describe tu proyecto o consulta aquí..."></textarea>
+                    <span class="error" id="errorMensaje"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn">Enviar Mensaje</button>
+                <p class="success" id="successMsg"></p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 Renato · <a href="https://github.com/renato5afk?tab=repositories">GitHub</a> ·
+        <a href="https://www.linkedin.com/jobs/">LinkedIn</a>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>

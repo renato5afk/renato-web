@@ -1,0 +1,603 @@
+/* Generales y Reseteo */
+:root {
+    /* Paleta Evangelion */
+    --color-eva-dark-bg: #1A002A; /* Fondo morado oscuro, casi negro */
+    --color-eva-surface: #2E004B; /* Superficies, secciones */
+    --color-eva-accent-purple: #7B00CC; /* Morado intenso para acentos */
+    --color-eva-accent-green: #39FF14; /* Verde neón brillante para CTA y destacados */
+    --color-eva-text-light: #E0E0E0; /* Texto principal claro */
+    --color-eva-text-muted: #A080B0; /* Texto secundario, morado claro */
+    --color-error: #FF6B6B; /* Rojo para errores */
+    --color-success: #6AFF6A; /* Verde para mensajes de éxito */
+    /* Fuentes - Orbitron para títulos, Roboto Mono para cuerpo y código */
+    --font-primary: 'Roboto Mono', monospace;
+    --font-heading: 'Orbitron', sans-serif;
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-eva-dark-bg);
+    color: var(--color-eva-text-light);
+    margin: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--color-eva-accent-green); /* Enlaces en verde neón */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #6aff6a; /* Un tono más claro de verde */
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading); /* Títulos con fuente Orbitron */
+    color: var(--color-eva-text-light);
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5); /* Sutil brillo neón */
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-eva-surface);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4); /* Sombra más pronunciada */
+    position: sticky; /* Sticky navbar */
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--color-eva-accent-purple); /* Borde inferior temático */
+}
+
+    .navbar .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--color-eva-text-light);
+        text-shadow: 0 0 5px rgba(123, 0, 204, 0.7); /* Brillo para el logo */
+    }
+
+        .navbar .logo span {
+            color: var(--color-eva-accent-green); /* Punto del logo en verde */
+        }
+
+    .navbar #nav-menu a {
+        color: var(--color-eva-text-muted);
+        margin-left: var(--spacing-md);
+        font-weight: 500;
+        letter-spacing: 0.05em; /* Espaciado entre letras */
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+        .navbar #nav-menu a:hover {
+            color: var(--color-eva-accent-green);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.7); /* Brillo al pasar el mouse */
+        }
+
+#dark-toggle, #hamburger {
+    background: none;
+    border: none;
+    color: var(--color-eva-accent-green); /* Iconos en verde */
+    font-size: 1.8rem; /* Tamaño un poco más grande */
+    cursor: pointer;
+    margin-left: var(--spacing-sm);
+    transition: transform 0.2s ease;
+}
+
+    #dark-toggle:hover, #hamburger:hover {
+        transform: scale(1.1);
+    }
+
+#hamburger {
+    display: none;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    min-height: 90vh; /* Ocupa más espacio vertical */
+    gap: var(--spacing-lg);
+    background: radial-gradient(circle at top left, var(--color-eva-accent-purple) 0%, transparent 40%), radial-gradient(circle at bottom right, var(--color-eva-accent-green) 0%, transparent 40%), var(--color-eva-dark-bg); /* Fondo con gradientes sutiles */
+    overflow: hidden; /* Para contener efectos de fondo */
+    position: relative;
+    /* Si quisieras una imagen de fondo en esta sección vía CSS, aquí la pondrías: */
+    /* background-image: url('../img/eva-background.webp'); */
+    /* background-size: cover; */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+}
+
+    .hero::before { /* Efecto de escaneo tipo HUD */
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0,255,0,0.1), rgba(0,255,0,0.01), transparent, rgba(123,0,204,0.01), rgba(123,0,204,0.1));
+        animation: scan-line 10s infinite linear; /* Animación de línea de escaneo */
+        pointer-events: none;
+        opacity: 0.2;
+    }
+
+@keyframes scan-line {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+.hero img {
+    max-width: 400px; /* Tamaño de la imagen del hero */
+    height: auto;
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 20px var(--color-eva-accent-purple); /* Sombra más profunda con brillo */
+    border: 3px solid var(--color-eva-accent-green); /* Borde llamativo */
+    animation: pulse-border 2s infinite alternate; /* Animación de pulso */
+}
+
+@keyframes pulse-border {
+    from {
+        border-color: var(--color-eva-accent-green);
+        box-shadow: 0 0 20px var(--color-eva-accent-purple);
+    }
+
+    to {
+        border-color: var(--color-eva-accent-purple);
+        box-shadow: 0 0 30px var(--color-eva-accent-green);
+    }
+}
+
+.hero-text {
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: 4.5rem; /* Título más grande */
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.1;
+    letter-spacing: 0.08em; /* Más espaciado para títulos */
+    text-transform: uppercase; /* Mayúsculas */
+    text-shadow: 0 0 15px var(--color-eva-accent-green); /* Brillo verde más fuerte */
+}
+
+    .hero h1 span {
+        color: var(--color-eva-accent-green); /* Nombre en verde neón */
+    }
+
+.hero p {
+    font-size: 1.5rem; /* Descripción más grande */
+    color: var(--color-eva-text-muted);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 0 5px rgba(160, 128, 176, 0.5); /* Sutil sombra en texto secundario */
+}
+
+/* Botones */
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px; /* Bordes más redondeados */
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase; /* Mayúsculas en botones */
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    /* Basic button styles that apply to both primary and secondary */
+}
+
+.btn-primary {
+    background-color: var(--color-eva-accent-purple);
+    color: var(--color-eva-text-light);
+    border: 2px solid var(--color-eva-accent-purple);
+    box-shadow: 0 0 15px rgba(123, 0, 204, 0.5); /* Sombra con brillo */
+}
+
+    .btn-primary:hover {
+        background-color: #9933FF; /* Tono más claro de morado */
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(123, 0, 204, 0.7), 0 0 20px rgba(123, 0, 204, 0.9);
+    }
+
+.btn-secondary {
+    background-color: var(--color-eva-accent-green);
+    color: var(--color-eva-dark-bg); /* Texto oscuro en botón brillante */
+    border: 2px solid var(--color-eva-accent-green);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+}
+
+    .btn-secondary:hover {
+        background-color: #6AFF6A; /* Tono más claro de verde */
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(57, 255, 20, 0.7), 0 0 20px rgba(57, 255, 20, 0.9);
+    }
+
+/* Styles for the "Abrir Currículum" button (btn-curriculum) */
+.btn-curriculum {
+    background-color: var(--color-eva-accent-purple); /* Use the accent purple variable */
+    color: var(--color-eva-text-light); /* Text color light */
+    border: 2px solid var(--color-eva-accent-purple); /* Border with accent purple */
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(123, 0, 204, 0.5); /* Sombra con brillo */
+    margin-top: var(--spacing-md); /* Add some space above the button */
+}
+
+    .btn-curriculum:hover {
+        background-color: #9933FF; /* A slightly lighter purple for hover */
+        transform: translateY(-3px); /* Lift effect on hover */
+        box-shadow: 0 5px 20px rgba(123, 0, 204, 0.7), 0 0 20px rgba(123, 0, 204, 0.9); /* Enhanced shadow on hover */
+    }
+
+/* === ESTILOS AÑADIDOS/MODIFICADOS PARA PROYECTOS Y BOTÓN === */
+
+/* Estilo para cada tarjeta de proyecto */
+.project-card {
+    background-color: var(--color-eva-surface); /* Color de fondo para la tarjeta */
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 60px; /* Espacio entre proyectos */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(123, 0, 204, 0.3); /* Sombra con brillo morado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--color-eva-accent-purple); /* Borde temático */
+}
+
+    .project-card h3 {
+        font-size: 2em;
+        color: var(--color-eva-accent-green); /* Título del proyecto en verde neón */
+        margin-bottom: 25px;
+        text-shadow: 0 0 10px rgba(57, 255, 20, 0.7); /* Brillo para el título */
+    }
+
+/* Contenedor para el contenido principal (imágenes + descripción) */
+.project-content {
+    display: flex;
+    flex-direction: column; /* Por defecto apilado para móviles */
+    align-items: center;
+    width: 100%;
+}
+
+/* Contenedor de imágenes dentro de cada proyecto */
+.project-images {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las imágenes pasen a la siguiente línea */
+    justify-content: center; /* Centra las imágenes */
+    gap: 20px; /* Espacio entre las imágenes y el botón */
+    margin-bottom: 30px;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    align-items: center; /* Centra verticalmente los elementos (imagen y botón) */
+}
+
+    .project-images img {
+        max-width: 100%; /* Asegura que la imagen no se desborde */
+        height: auto; /* Mantiene la proporción */
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 10px var(--color-eva-accent-green); /* Sombra y brillo para imágenes */
+        object-fit: contain; /* Ajusta la imagen dentro de su contenedor sin recortar */
+        max-height: 300px; /* Limita la altura de las imágenes */
+        border: 1px solid var(--color-eva-accent-green); /* Borde sutil para las imágenes */
+    }
+
+/* Estilo para la descripción del proyecto */
+.project-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--color-eva-text-muted); /* Texto secundario para descripciones */
+    text-align: center;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+/* Estilos para los enlaces (botones) del proyecto */
+/* Aquí se aplican los estilos para el botón de GitHub */
+.btn-project {
+    display: inline-flex; /* Usar flexbox para centrar contenido (texto e ícono si añades) */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    padding: 12px 25px; /* Aumentar el padding para que sea más grande */
+    background-color: var(--color-eva-accent-purple); /* Usar tu morado de acento */
+    color: var(--color-eva-text-light); /* Texto claro */
+    text-decoration: none; /* Quitar el subrayado predeterminado */
+    border-radius: 8px; /* Bordes más redondeados */
+    font-weight: 700; /* Texto en negrita */
+    font-size: 1.1em; /* Un poco más grande el texto */
+    letter-spacing: 0.05em; /* Espaciado entre letras */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    box-shadow: 0 5px 15px rgba(123, 0, 204, 0.4), 0 0 10px rgba(123, 0, 204, 0.7); /* Sombra con brillo morado */
+    border: none; /* Asegurarse de que no haya borde */
+    cursor: pointer; /* Indicar que es clickeable */
+    /* Para que el botón aparezca al lado de la imagen en dispositivos pequeños también */
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+    .btn-project:hover {
+        background-color: #9933FF; /* Tono más claro de morado para hover */
+        transform: translateY(-2px); /* Un ligero levantamiento al pasar el ratón */
+        box-shadow: 0 8px 20px rgba(123, 0, 204, 0.6), 0 0 15px rgba(123, 0, 204, 0.9); /* Sombra más pronunciada al pasar el ratón */
+    }
+
+    .btn-project:active {
+        transform: translateY(0); /* Volver a la posición normal al hacer clic */
+        box-shadow: 0 3px 10px rgba(123, 0, 204, 0.3); /* Sombra más suave al hacer clic */
+    }
+
+
+/* Secciones generales */
+section {
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+    position: relative;
+}
+
+    section:nth-of-type(odd) {
+        background-color: var(--color-eva-dark-bg);
+    }
+
+    section:nth-of-type(even) {
+        background-color: var(--color-eva-surface);
+        box-shadow: inset 0 5px 15px rgba(0,0,0,0.3); /* Sombra interna para separar secciones */
+    }
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-eva-accent-green); /* Títulos de sección en verde */
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.7);
+}
+
+/* Skills Section */
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Habilidades un poco más grandes */
+    gap: var(--spacing-md);
+    list-style: none;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+    .skill-grid li {
+        background-color: var(--color-eva-dark-bg);
+        border: 2px solid var(--color-eva-accent-purple); /* Borde morado */
+        padding: var(--spacing-md);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        box-shadow: 0 0 10px rgba(123, 0, 204, 0.3);
+    }
+
+        .skill-grid li:hover {
+            transform: translateY(-8px) scale(1.05); /* Efecto más pronunciado */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 25px var(--color-eva-accent-green); /* Sombra con brillo verde */
+            border-color: var(--color-eva-accent-green); /* Borde cambia a verde */
+        }
+
+        .skill-grid li img {
+            width: 60px; /* Íconos más grandes */
+            height: 60px;
+            filter: drop-shadow(0 0 5px var(--color-eva-accent-green)); /* Sombra para los íconos */
+        }
+
+        .skill-grid li span {
+            font-weight: bold;
+            color: var(--color-eva-text-light);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+
+/* Contact Section */
+.contact form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: left;
+}
+
+.contact label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-eva-text-light);
+}
+
+.contact input[type="text"],
+.contact input[type="email"],
+.contact textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--color-eva-accent-purple); /* Borde morado */
+    border-radius: 5px;
+    background-color: var(--color-eva-surface);
+    color: var(--color-eva-text-light);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .contact input[type="text"]:focus,
+    .contact input[type="email"]:focus,
+    .contact textarea:focus {
+        outline: none;
+        border-color: var(--color-eva-accent-green); /* Borde verde al enfocar */
+        box-shadow: 0 0 0 4px rgba(57, 255, 20, 0.3); /* Resplandor al enfocar */
+    }
+
+.contact textarea {
+    resize: vertical;
+}
+
+.contact .error {
+    color: var(--color-error);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-xs);
+    display: block;
+}
+
+.contact .success {
+    color: var(--color-success);
+    font-size: 1rem;
+    margin-top: var(--spacing-md);
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-eva-surface);
+    color: var(--color-eva-text-muted);
+    padding: var(--spacing-md);
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 2px solid var(--color-eva-accent-purple); /* Borde superior temático */
+    box-shadow: inset 0 5px 15px rgba(0,0,0,0.3);
+}
+
+    footer a {
+        color: var(--color-eva-text-muted);
+        margin: 0 var(--spacing-xs);
+    }
+
+        footer a:hover {
+            color: var(--color-eva-accent-green);
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+        }
+
+/* Media Queries para Responsividad */
+@media (min-width: 768px) {
+    .hero {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-around;
+    }
+
+        .hero img {
+            order: 1;
+            margin-right: var(--spacing-lg);
+        }
+
+    .hero-text {
+        order: 2;
+    }
+
+    .hero h1 {
+        font-size: 5.5rem; /* Más grande en desktop */
+    }
+
+    .hero p {
+        font-size: 1.6rem;
+    }
+
+    .navbar #hamburger {
+        display: none;
+    }
+
+    .navbar #nav-menu {
+        display: flex;
+    }
+
+    .skill-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Más espacio en desktop */
+    }
+
+    /* Responsive Design para pantallas más grandes de proyectos */
+    .project-content {
+        flex-direction: row; /* En pantallas grandes, las imágenes y la descripción pueden ir lado a lado */
+        gap: 40px;
+        justify-content: space-between; /* Espaciar elementos */
+        align-items: flex-start; /* Alinear arriba */
+    }
+
+    .project-images {
+        flex: 1; /* Permite que las imágenes tomen espacio flexible */
+        justify-content: flex-start; /* Alinear imágenes y botón a la izquierda */
+        /* Si quieres que el botón aparezca _debajo_ de la imagen en lugar de al lado en desktop,
+           cambia flex-direction a column para .project-images */
+        /* flex-direction: column; */
+    }
+
+        .project-images .btn-project {
+            /* Ajustes específicos para el botón si está al lado de la imagen en desktop */
+            margin-left: 15px; /* Espacio entre la imagen y el botón */
+            /* Si project-images tiene flex-direction: column; entonces usar margin-top */
+            /* margin-top: 20px; */
+        }
+
+    .project-description {
+        flex: 1.5; /* La descripción toma más espacio */
+        text-align: left; /* Alinear texto a la izquierda en pantallas grandes */
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .project-card {
+        padding: 50px;
+    }
+
+    .project-images img {
+        max-height: 400px; /* Un poco más grandes en pantallas muy grandes */
+    }
+}
+
+
+/* Estilos para el menú móvil (cuando el #hamburger está activo) - Requiere JavaScript */
+/* Añadir esta clase dinámicamente con JS al #nav-menu cuando el menú se abre */
+/*
+.navbar #nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-eva-surface);
+    padding: var(--spacing-md);
+    z-index: 999;
+    border-bottom: 2px solid var(--color-eva-accent-purple);
+}
+*/
